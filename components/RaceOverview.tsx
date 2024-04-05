@@ -30,7 +30,7 @@ export default function RaceOverview({
           <InfoItem info={itraPoints} label="ITRA POINTS" />
         ) : null}
         <button
-          className="px-4 py-2 bg-slate-900"
+          className="px-6 py-3 bg-slate-900 mt-4"
           onClick={toggleMapInteraction}
         >
           <span className="text-white text-sm"> EXPLORE ROUTE</span>

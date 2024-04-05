@@ -36,7 +36,7 @@ export default function MapRaceOverview({
         <span className="text-black text-base"> Select Race</span>
       </button> */}
       <button
-        className="px-4 py-2 bg-slate-900 z-50"
+        className="px-6 py-3 bg-slate-900  z-50"
         onClick={onBackToSelection}
       >
         <span className="text-white text-sm"> SELECT RACE</span>
