@@ -10,19 +10,20 @@ export const useElementOnScreen = (options) => {
   };
 
   useEffect(() => {
+    const refContainer = containerRef.current;
     const observer = new IntersectionObserver(callbackFunction, options);
     if (containerRef.current) observer.observe(containerRef.current);
 
     return () => {
-      if (containerRef.current) observer.unobserve(containerRef.current);
+      if (refContainer) observer.unobserve(refContainer);
     };
-  }, [containerRef, options]);
+  }, [options]);
 
-  return [containerRef, isVisible];
+  return { containerRef, isVisible };
 };
 
 export const ScrollableDiv = ({ children, id, onVisible }) => {
-  const [containerRef, isVisible] = useElementOnScreen({
+  const { isVisible, containerRef } = useElementOnScreen({
     root: null,
     rootMargin: "0px",
     threshold: 0.3, // Adjust this value to change the visibility threshold
