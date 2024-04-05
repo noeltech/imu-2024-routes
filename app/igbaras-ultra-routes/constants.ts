@@ -1,3 +1,5 @@
+import mapboxgl from "mapbox-gl";
+
 export const viewStateMobile = {
   initial: {
     center: [122.21107416260037, 10.781527996457342],
@@ -91,8 +93,10 @@ const findThreshold = (value: number) => {
   }
 };
 
+const center = new mapboxgl.LngLat(122.26065647406756, 10.721877104718047);
+
 export const raceStartView = {
-  center: [122.26065647406756, 10.721877104718047],
+  center: center,
   zoom: 13.195584147955165,
   pitch: 72.99999999999991,
   bearing: -31.2000000000005,
