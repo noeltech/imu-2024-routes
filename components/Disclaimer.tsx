@@ -15,7 +15,7 @@ export default function Disclaimer() {
               Its sole purpose is to showcase its Race routes in reference with
               Igbaras Mountains. Some information may not be technically super
               accurate.For question or recommendations email me at
-              noelbajande@gmail.com
+              banwadevtech@gmail.com
             </p>
           </div>
           <div className="bg-slate-900 ">
