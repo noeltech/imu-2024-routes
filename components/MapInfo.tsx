@@ -8,7 +8,7 @@ export default function MapInfo() {
   useEffect(() => {
     const onMoveMap = (e) => {
       const { viewState } = e;
-      console.log(viewState);
+      // console.log(viewState);
       // setViewState(viewState);
     };
     map?.on("zoomend", onMoveMap);
