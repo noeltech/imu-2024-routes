@@ -1,4 +1,22 @@
-export const raceDetails = {
+import { RaceViews } from "./ImuRoutesMap";
+
+export type RaceDetailType = {
+  title: string;
+  maxTime: string;
+  elevationGain: string;
+  distance: string;
+  itraPoints: number;
+  layerName: string;
+  id: RaceViews;
+};
+
+type raceDetailsType = {
+  imu10: RaceDetailType;
+  imu21: RaceDetailType;
+  imu50: RaceDetailType;
+  imu80: RaceDetailType;
+};
+export const raceDetails: raceDetailsType = {
   imu10: {
     title: "IMU 10",
     maxTime: "4 HRS",

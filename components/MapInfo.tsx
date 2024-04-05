@@ -1,12 +1,12 @@
-import { useEffect, useState } from "react";
-import { Map, useMap } from "react-map-gl";
+import { useEffect } from "react";
+import { useMap } from "react-map-gl";
 
 export default function MapInfo() {
   const { current: map } = useMap();
   // const [viewState, setViewState] = useState();
 
   useEffect(() => {
-    const onMoveMap = (e) => {
+    const onMoveMap = (e: mapboxgl.EventData) => {
       const { viewState } = e;
       // console.log(viewState);
       // setViewState(viewState);

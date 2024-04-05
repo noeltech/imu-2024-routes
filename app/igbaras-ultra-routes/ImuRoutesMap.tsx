@@ -10,12 +10,14 @@ import RaceOverview from "@/components/RaceOverview";
 import MapRaceOverview from "@/components/MapRaceOverview";
 import Disclaimer from "@/components/Disclaimer";
 
+export type RaceViews = "initial" | "imu10" | "imu21" | "imu50" | "imu80";
+
 const myMapBoxToken = process.env.MAPBOX_TOKEN_API;
 export default function IgbarasUltra() {
   const scrollContainerRef = useRef(null);
-  const mapRef = useRef<MapRef>();
+  const mapRef = useRef<MapRef | null>(null);
   const [routesStyle, setRoutesStyle] = useState<LineLayer>(initialStyle);
-  const [currentRace, setCurrentRace] = useState(null);
+  const [currentRace, setCurrentRace] = useState<RaceViews>("initial");
 
   const [isMapInteractive, setIsMapInteractive] = useState(false);
 
@@ -34,7 +36,7 @@ export default function IgbarasUltra() {
     }
   }, [isMapInteractive]);
 
-  const handleChangeInScrollView = useCallback((id) => {
+  const handleChangeInScrollView = useCallback((id: RaceViews) => {
     const layerName = id === "initial" ? "eighty" : raceDetails[id].layerName;
     const newStyle = getLayerStyle(layerName);
     setRoutesStyle(newStyle);
@@ -74,7 +76,7 @@ export default function IgbarasUltra() {
           {/* <MapInfo /> */}
           <MapRaceOverview
             isVisible={isMapInteractive}
-            data={currentRace ? raceDetails[currentRace] : null}
+            data={currentRace !== "initial" ? raceDetails[currentRace] : null}
             onBackToSelection={toggleMapInteraction}
           />
 

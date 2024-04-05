@@ -1,10 +1,18 @@
+import { RaceViews } from "@/app/igbaras-ultra-routes/ImuRoutesMap";
+import { RaceDetailType } from "@/app/igbaras-ultra-routes/race-details";
 import { ScrollableDiv } from "@/app/utils/scroll-detect";
+import { MouseEventHandler } from "react";
 
+type RaceOverviewProps = {
+  onVisible: (id: RaceViews) => void;
+  data: RaceDetailType;
+  toggleMapInteraction: () => void;
+};
 export default function RaceOverview({
   onVisible,
   toggleMapInteraction,
   data,
-}) {
+}: RaceOverviewProps) {
   const { title, distance, elevationGain, maxTime, itraPoints, id } = data;
   console.log(id);
   return (
@@ -31,8 +39,11 @@ export default function RaceOverview({
     </ScrollableDiv>
   );
 }
-
-function InfoItem({ info, label }) {
+type InfoItemProps = {
+  info: string | number;
+  label: string;
+};
+function InfoItem({ info, label }: InfoItemProps) {
   return (
     <div className="bg-black/60 w-max px-4 py-1 mb-2">
       <p className=" text-white ">

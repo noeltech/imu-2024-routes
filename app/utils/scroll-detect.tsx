@@ -1,10 +1,13 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, ReactNode } from "react";
+import { RaceViews } from "../igbaras-ultra-routes/ImuRoutesMap";
 
-export const useElementOnScreen = (options) => {
+export const useElementOnScreen = (
+  options: IntersectionObserverInit | undefined
+) => {
   const containerRef = useRef(null);
   const [isVisible, setIsVisible] = useState(false);
 
-  const callbackFunction = (entries) => {
+  const callbackFunction = (entries: IntersectionObserverEntry[]) => {
     const [entry] = entries;
     setIsVisible(entry.isIntersecting);
   };
@@ -22,7 +25,16 @@ export const useElementOnScreen = (options) => {
   return { containerRef, isVisible };
 };
 
-export const ScrollableDiv = ({ children, id, onVisible }) => {
+type ScrollableDivsProps = {
+  children: ReactNode;
+  id: RaceViews;
+  onVisible: (id: RaceViews) => void;
+};
+export const ScrollableDiv = ({
+  children,
+  id,
+  onVisible,
+}: ScrollableDivsProps) => {
   const { isVisible, containerRef } = useElementOnScreen({
     root: null,
     rootMargin: "0px",
