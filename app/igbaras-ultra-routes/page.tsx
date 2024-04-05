@@ -17,8 +17,7 @@ import { scrollThreshold, viewStateMobile, raceStartView } from "./constants";
 import RaceOverview from "@/components/RaceOverview";
 import MapRaceOverview from "@/components/MapRaceOverview";
 import Disclaimer from "@/components/Disclaimer";
-const myMapBoxToken =
-  "pk.eyJ1Ijoibm9lbHRlY2giLCJhIjoiY2o2azRiazZ2MTVlZDMxbXdvdTU1OW03YSJ9.eYd9NVbg2cgcrAqs0da8eA";
+const myMapBoxToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN_API;
 
 export default function IgbarasUltra() {
   const scrollContainerRef = useRef(null);
