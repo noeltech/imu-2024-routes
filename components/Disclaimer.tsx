@@ -6,9 +6,9 @@ export default function Disclaimer() {
     setIsOpen((prev) => !prev);
   };
   return (
-    <div className="absolute bottom-10">
+    <div className="absolute bottom-10 ">
       {isOpen ? (
-        <div className="flex">
+        <div className="flex w-[90%] md:w-[60%]">
           <div className="bg-black p-4 ">
             <p className="text-white text-xs">
               This Website is not affiliated with IGBARAS MOUNTAIN ULTRA 2024.
@@ -33,7 +33,7 @@ export default function Disclaimer() {
             className="w-full h-full items-center justify-normal flex px-3"
             onClick={toggleOpen}
           >
-            <span className="text-white text-sm">Disclaimer</span>
+            <span className="text-white text-sm">!</span>
           </button>
         </div>
       )}

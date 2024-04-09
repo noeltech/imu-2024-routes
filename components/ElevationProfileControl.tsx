@@ -1,24 +1,24 @@
 import { FieldValue } from "firebase/firestore";
 import { truncate } from "fs/promises";
 import mapboxgl from "mapbox-gl";
-import { useCallback, useState } from "react";
+import React from "react";
+import { memo, useCallback, useMemo, useState } from "react";
 import { Marker, Popup } from "react-map-gl";
 import {
   AreaChart,
   Area,
   XAxis,
   YAxis,
-  CartesianGrid,
   Tooltip,
   ResponsiveContainer,
-  ReferenceLine,
 } from "recharts";
+import { useDebouncedCallback } from "use-debounce";
 
-export default function ElevationProfileControl({ data }) {
+export default function ElevationProfileControl({ data, mapRef }) {
   const initialMarkerCoordinates = data ? data[0].coordinates : null;
   const [currentMarker, setCurrentMarker] = useState(initialMarkerCoordinates);
 
-  const [referenceData, setReferenceData] = useState({});
+  const [referenceData, setReferenceData] = useState(data[0]);
   //   console.log(data.value);
   // const handleTooltipChange = (data) => {
   //   console.log(data);
@@ -30,16 +30,49 @@ export default function ElevationProfileControl({ data }) {
   //   }
   // };
 
-  const onMouseMove = useCallback((e) => {
-    console.log(e);
-
-    if (!e.activePayload) return;
+  const debouncedFlyTo = useDebouncedCallback((e) => {
     const coord = e.activePayload[0].payload.coordinates;
     const payload = e.activePayload[0].payload;
 
     setReferenceData(payload);
     setCurrentMarker(coord);
-  }, []);
+    const center = new mapboxgl.LngLat(coord[0], coord[1]);
+    mapRef.current.flyTo({
+      center: center,
+      zoom: 13,
+      pitch: 60,
+      duration: 1000,
+      speed: 0.6,
+    });
+  }, 30);
+
+  const effects = useCallback(
+    (e) => {
+      const coord = e.activePayload[0].payload.coordinates;
+      const payload = e.activePayload[0].payload;
+
+      setReferenceData(payload);
+      setCurrentMarker(coord);
+      const center = new mapboxgl.LngLat(coord[0], coord[1]);
+      mapRef.current.flyTo({
+        center: center,
+        zoom: 13,
+        pitch: 60,
+        duration: 1000,
+        speed: 0.6,
+      });
+    },
+    [mapRef]
+  );
+
+  const onMouseMove = useCallback(
+    (e) => {
+      if (!e.activePayload) return;
+      effects(e);
+      // debouncedFlyTo(e);
+    },
+    [effects]
+  );
 
   const customTooltip = (
     <div className="bg-white rounded-sm border-slate-800 p-2">
@@ -67,16 +100,17 @@ export default function ElevationProfileControl({ data }) {
             longitude={currentMarker[0]}
             latitude={currentMarker[1]}
             color="red"
-            anchor="top"
+            anchor="center"
+            pitchAlignment="auto"
           />
           {/* <Popup
-            anchor="top-right"
-            offset={10}
-            longitude={currentMarker[0]}
-            latitude={currentMarker[1]}
-          >
-            {customTooltip}
-          </Popup> */}
+                anchor="top-right"
+                offset={10}
+                longitude={currentMarker[0]}
+                latitude={currentMarker[1]}
+              >
+                {customTooltip}
+              </Popup> */}
         </>
       ) : null}
       <ResponsiveContainer width="100%" height="100%">
@@ -94,18 +128,7 @@ export default function ElevationProfileControl({ data }) {
           // onMouseEnter={onMouseMove}
         >
           {/* <CartesianGrid strokeDasharray="3 3" /> */}
-          <XAxis
-            xAxisId={0}
-            dataKey="x"
-            minTickGap={20}
-            tickFormatter={(value, i) => (value / 1000).toString()}
-            label={{
-              value: "Distance (km)",
 
-              position: "insideBottom",
-              offset: 40,
-            }}
-          />
           <YAxis
             type="number"
             dataKey="y"
@@ -118,7 +141,18 @@ export default function ElevationProfileControl({ data }) {
             // tickCount={5}
             // interval={"equidistantPreserveStart"}
           />
+          <XAxis
+            xAxisId={0}
+            dataKey="x"
+            minTickGap={20}
+            tickFormatter={(value) => (value / 1000).toString()}
+            label={{
+              value: "Distance (km)",
 
+              position: "insideBottom",
+              offset: 40,
+            }}
+          />
           <Tooltip
             // onMouseEnter={handleTooltipChange}
             // onMouseLeave={handleTooltipChange}
@@ -144,3 +178,11 @@ export default function ElevationProfileControl({ data }) {
     </>
   );
 }
+
+// const MemoizedXaxis = React.memo(function () {
+//   return (
+
+//   );
+// });
+
+// MemoizedXaxis.displayName = "xAxis";

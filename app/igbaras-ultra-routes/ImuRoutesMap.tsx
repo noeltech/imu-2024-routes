@@ -10,10 +10,9 @@ import { viewStateMobile, raceStartView } from "./constants";
 import RaceOverview from "@/components/RaceOverview";
 import MapRaceOverview from "@/components/MapRaceOverview";
 import Disclaimer from "@/components/Disclaimer";
-import useData from "./routes-data";
+
 import ElevationProfileControl from "@/components/ElevationProfileControl";
-import db from "../config";
-import { doc, setDoc } from "firebase/firestore";
+
 import useRoutes from "./routes-data";
 export type RaceViews = "initial" | "imu10" | "imu21" | "imu50" | "imu80";
 
@@ -108,7 +107,7 @@ export default function IgbarasUltra() {
             data={currentRace !== "initial" ? raceDetails[currentRace] : null}
             onBackToSelection={toggleMapInteraction}
           >
-            <ElevationProfileControl data={routeData} />
+            <ElevationProfileControl data={routeData} mapRef={mapRef} />
           </MapRaceOverview>
           {/* <Layer {...routeBorder}></Layer> */}
 
@@ -151,7 +150,7 @@ export default function IgbarasUltra() {
           data={raceDetails["imu10"]}
         />
       </div>
-      {/* <Disclaimer /> */}
+      <Disclaimer />
     </main>
   );
 }

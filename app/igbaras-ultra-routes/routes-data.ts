@@ -5,7 +5,7 @@
 import db from "../config";
 import { doc, getDoc, setDoc } from "firebase/firestore";
 
-import { useRef } from "react";
+import { useCallback, useRef } from "react";
 
 // export default async function useData() {
 //   const file = await fs.readFile(
@@ -71,24 +71,27 @@ let initialRoutesRef = { imu10: null, imu21: null, imu50: null, imu80: null };
 export default function useRoutes() {
   const routesRef = useRef(initialRoutesRef);
   const { current: routes } = routesRef;
-  const getRoute = async (routeName: string) => {
-    if (routes[routeName]) return routes[routeName];
+  const getRoute = useCallback(
+    async (routeName: string) => {
+      if (routes[routeName]) return routes[routeName];
 
-    try {
-      const docRef = doc(db, "imu-routes", routeName);
-      const docSnap = await getDoc(docRef);
+      try {
+        const docRef = doc(db, "imu-routes", routeName);
+        const docSnap = await getDoc(docRef);
 
-      if (docSnap.exists()) {
-        const data = docSnap.data();
-        routesRef.current[routeName] = data.route;
-        return data.route;
-      } else {
-        return [];
+        if (docSnap.exists()) {
+          const data = docSnap.data();
+          routesRef.current[routeName] = data.route;
+          return data.route;
+        } else {
+          return [];
+        }
+      } catch (error) {
+        throw new Error(error);
       }
-    } catch (error) {
-      throw new Error(error);
-    }
-  };
+    },
+    [routes]
+  );
 
   return getRoute;
 }
