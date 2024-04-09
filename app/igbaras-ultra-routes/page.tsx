@@ -7,5 +7,11 @@ export const metadata: Metadata = {
 };
 
 export default function IgbarasUltra() {
-  return <ImuRoutesMap />;
+  // const data = useData();
+
+  return (
+    <>
+      <ImuRoutesMap />
+    </>
+  );
 }
