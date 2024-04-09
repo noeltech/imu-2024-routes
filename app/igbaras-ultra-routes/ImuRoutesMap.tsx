@@ -80,8 +80,8 @@ export default function IgbarasUltra() {
   );
 
   return (
-    <main className="h-screen relative">
-      <div className="h-screen sticky">
+    <main className="min-h-screen relative">
+      <div className="absolute inset-0">
         <Map
           ref={mapRef}
           mapboxAccessToken={myMapBoxToken}
