@@ -6,7 +6,7 @@ import { MouseEventHandler } from "react";
 type RaceOverviewProps = {
   onVisible: (id: RaceViews) => void;
   data: RaceDetailType;
-  toggleMapInteraction: () => void;
+  toggleMapInteraction: (id: RaceViews) => void;
 };
 export default function RaceOverview({
   onVisible,
@@ -14,7 +14,7 @@ export default function RaceOverview({
   data,
 }: RaceOverviewProps) {
   const { title, distance, elevationGain, maxTime, itraPoints, id } = data;
-  console.log(id);
+
   return (
     <ScrollableDiv id={id} onVisible={onVisible}>
       <div className="pl-3 sm:pl-10 pt-3 sm:pt-10 ">
@@ -31,9 +31,9 @@ export default function RaceOverview({
         ) : null}
         <button
           className="px-6 py-3 bg-slate-900 mt-4"
-          onClick={toggleMapInteraction}
+          onClick={() => toggleMapInteraction(id)}
         >
-          <span className="text-white text-sm"> EXPLORE ROUTE</span>
+          <span className="text-white text-sm">Explore Route</span>
         </button>
       </div>
     </ScrollableDiv>

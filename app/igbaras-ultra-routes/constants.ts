@@ -99,3 +99,46 @@ export const raceStartView = {
   pitch: 72.99999999999991,
   bearing: -31.2000000000005,
 };
+
+export const imuPoiStyle = {
+  id: "imu-poi",
+  type: "symbol",
+  source: "composite",
+  "source-layer": "imu_poi",
+  layout: {
+    "text-field": ["concat", ["to-string", ["get", "distance_at"]], " km"],
+    "text-font": ["Open Sans SemiBold", "Arial Unicode MS Regular"],
+    "icon-image": [
+      "match",
+      ["get", "type"],
+      ["ws"],
+      "water-drop-5881",
+      ["as"],
+      "first-aid-kit-3949",
+      ["cp"],
+      "red-location-placeholder-and-check-mark-15943",
+      "",
+    ],
+    "icon-size": [
+      "match",
+      ["get", "type"],
+      ["ws"],
+      0.1,
+      ["as"],
+      0.12,
+      ["cp"],
+      0.13,
+      1,
+    ],
+    "text-anchor": "right",
+    "text-offset": [-1.2, 0],
+  },
+  paint: {
+    "text-color": "hsl(0, 0%, 100%)",
+    "text-halo-color": "hsl(0, 0%, 0%)",
+    "text-halo-width": 2,
+    "text-halo-blur": 1,
+    "text-opacity": 0,
+    "icon-opacity": 0,
+  },
+};

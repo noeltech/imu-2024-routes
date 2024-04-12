@@ -1,0 +1,20 @@
+<!-- <?xml version="1.0" standalone="no"?>
+
+<svg version="1.0" xmlns="http://www.w3.org/2000/svg"
+ width="20pt" height="20pt" viewBox="0 0 20 20"
+ preserveAspectRatio="xMidYMid meet">
+
+<g transform="translate(0.000000,20) scale(0.100000,-0.100000)"
+fill="#d49816" stroke="none">
+<path d="M400 425 c-42 -43 -52 -57 -42 -67 10 -10 24 0 67 42 30 30 54 59 52
+64 -7 22 -25 13 -77 -39z"/>
+<path d="M235 260 c-47 -47 -57 -62 -47 -72 10 -10 25 0 72 47 57 56 67 74 44
+82 -5 2 -36 -24 -69 -57z"/>
+<path d="M70 95 c-42 -43 -52 -57 -42 -67 10 -10 24 0 67 42 52 52 61 70 39
+77 -5 2 -34 -22 -64 -52z"/>
+</g>
+</svg> -->
+
+<svg width="22" height="22" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M2 10H18" stroke="#FFA500" stroke-width="3" stroke-dasharray="4 4 4"/>
+</svg>

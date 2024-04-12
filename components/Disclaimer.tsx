@@ -5,30 +5,31 @@ export default function Disclaimer() {
   const toggleOpen = () => {
     setIsOpen((prev) => !prev);
   };
+
+  if (!isOpen) return null;
   return (
-    <div className="absolute bottom-10 ">
-      {isOpen ? (
-        <div className="flex w-[90%] md:w-[60%]">
-          <div className="bg-black p-4 ">
-            <p className="text-white text-xs">
-              This Website is not affiliated with IGBARAS MOUNTAIN ULTRA 2024.
-              Its sole purpose is to showcase its Race routes in reference with
-              Igbaras Mountains. Some information may not be technically super
-              accurate.For question or recommendations email me at
-              banwadevtech@gmail.com
-            </p>
-          </div>
-          <div className="bg-slate-900 ">
-            <button
-              className="w-full h-full items-center justify-normal flex px-3"
-              onClick={toggleOpen}
-            >
-              <span className="text-white">X</span>
-            </button>
-          </div>
+    <div className="absolute bottom-0 z-50 p-4">
+      <div className="flex  md:w-[60%] rounded-md  relative mr-2">
+        <div className="bg-white p-4 ">
+          <p className="text-gray-800  font-serif">
+            This Website is not affiliated with IGBARAS MOUNTAIN ULTRA 2024. Its
+            sole purpose is to showcase its Race routes in reference with
+            Igbaras Mountains. Some information may not be technically super
+            accurate.For question or recommendations email me at
+            banwadevtech@gmail.com
+          </p>
         </div>
-      ) : (
-        <div className="bg-slate-900 p-2 ">
+        <div className="bg-slate-900 absolute rounded-full w-12 h-12 right-[-14px] top-[-14px]">
+          <button
+            className="w-full h-full items-center justify-center flex "
+            onClick={toggleOpen}
+          >
+            <span className="text-white ">X</span>
+          </button>
+        </div>
+      </div>
+
+      {/* <div className="bg-slate-900 p-2 ">
           <button
             className="w-full h-full items-center justify-normal flex px-3"
             onClick={toggleOpen}
@@ -36,7 +37,7 @@ export default function Disclaimer() {
             <span className="text-white text-sm">!</span>
           </button>
         </div>
-      )}
+      */}
     </div>
   );
 }

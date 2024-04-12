@@ -2,7 +2,7 @@ import { Metadata } from "next";
 import ImuRoutesMap from "./ImuRoutesMap";
 
 export const metadata: Metadata = {
-  title: "IMU ROUTES",
+  title: "IMU TRAIL ROUTES",
   description: "Banwa Tech Website - IMU Routes",
 };
 
