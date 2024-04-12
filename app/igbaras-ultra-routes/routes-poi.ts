@@ -1,4 +1,6 @@
-export const getImuPoiStyle = (route: string) => {
+import { SymbolLayer } from "mapbox-gl";
+
+export const getImuPoiStyle = (route: string): SymbolLayer => {
   return {
     id: "imu-poi-opacity",
     type: "symbol",
@@ -47,7 +49,7 @@ export const getImuPoiStyle = (route: string) => {
   };
 };
 
-export const imuPoiStyle = {
+export const imuPoiStyle: SymbolLayer = {
   id: "imu-poi-opacity",
   type: "symbol",
   source: "composite",

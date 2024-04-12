@@ -18,8 +18,7 @@ import ElevationProfileControl from "@/components/ElevationProfileControl";
 
 import useRoutes from "./routes-data";
 import AppBar from "@/components/AppBar";
-import { settings } from "firebase/analytics";
-import useResponsiveScreen from "../utils/media-detect";
+
 export type RaceViews = "initial" | "imu10" | "imu21" | "imu50" | "imu80";
 
 const myMapBoxToken = process.env.MAPBOX_TOKEN_API;
@@ -29,8 +28,7 @@ export default function IgbarasUltra() {
   const mapRef = useRef<MapRef | null>(null);
   const getRoute = useRoutes();
   const [routesStyle, setRoutesStyle] = useState<LineLayer>(initialStyle);
-  const [imuPoiStyle, setImuPoiStyle] =
-    useState<SymbolLayer>(initialImuPoiStyle);
+  const [imuPoiStyle, setImuPoiStyle] = useState(initialImuPoiStyle);
   const [currentRace, setCurrentRace] = useState<RaceViews>("initial");
   const [routeData, setRouteData] = useState([]);
   const [isMapInteractive, setIsMapInteractive] = useState(false);
@@ -53,6 +51,8 @@ export default function IgbarasUltra() {
         duration: 3000,
       });
       const newStyle = getImuPoiStyle(id);
+      console.log(newStyle);
+
       setImuPoiStyle(newStyle);
     }
     setIsMapInteractive((prev) => !prev);
